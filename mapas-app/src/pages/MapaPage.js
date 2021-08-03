@@ -4,14 +4,15 @@ import mapboxgl from "mapbox-gl";
 mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
 
 const puntoInicial = {
-  lng: 5,
-  lat: 34,
-  zoom: 2,
+  lng: -122.4725,
+  lat: 37.8010,
+  zoom: 13.5,
 };
 
 export const MapaPage = () => {
   const mapaDiv = useRef();
-  const [, setMapa] = useState();
+  const [mapa, setMapa] = useState();
+  const [coords, setCoords] = useState(puntoInicial);
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -24,8 +25,28 @@ export const MapaPage = () => {
     setMapa(map);
   }, []);
 
+  //cuando se mueve el mapa
+  useEffect(() => {
+
+      mapa?.on('move', () => {
+          const { lng, lat } = mapa.getCenter(); 
+          console.log(lng, lat);
+          setCoords({
+              lng: lng.toFixed(4),
+              lat: lat.toFixed(4),
+              zoom: mapa.getZoom().toFixed(2)
+          });
+      });
+      
+    //en caso de que se destruya el mapa al desmontar el componente
+    //   return () => mapa?.off('move');
+  },[mapa])
+
   return (
     <>
+      <div className="info">
+        Lng: {coords.lng} | lat: {coords.lat} | zoom: {coords.zoom}
+      </div>
       <div ref={mapaDiv} className="mapContainer"></div>
     </>
   );
