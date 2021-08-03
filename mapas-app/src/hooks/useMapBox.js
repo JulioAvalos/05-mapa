@@ -34,6 +34,14 @@ export const useMapBox = (puntoInicial) => {
       
       marcadores.current[ marker.id ] = marker;
 
+      // escuchar movimientos del marcador 
+      marker.on('drag', (event) => {
+        const { id } = event.target;
+        const { lng, lat } = event.target.getLngLat();
+        
+        // todo: emitir los cambios del marcador
+      })
+
   },[]);
 
   useEffect(() => {
