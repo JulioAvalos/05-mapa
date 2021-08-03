@@ -1,4 +1,4 @@
-# Ticket App -
+# Mapas App -
 
 Aplicacion full stack para hacer pruebas con socket.io
 
