@@ -19,7 +19,7 @@ class Sockets {
             console.log('cliente conectado');
             
             socket.emit('marcadores-activos', this.marcadores.activos);
-
+  
             socket.on('marcador-nuevo', (marcador) => {
                 this.marcadores.agregarMarcador(marcador);
                 socket.broadcast.emit('marcador-nuevo', marcador);
