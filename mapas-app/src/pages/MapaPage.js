@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { SocketContext } from "../context/SocketContext";
 
 import { useMapBox } from "../hooks/useMapBox";
 
