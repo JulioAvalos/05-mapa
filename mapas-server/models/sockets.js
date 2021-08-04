@@ -18,9 +18,12 @@ class Sockets {
 
             console.log('cliente conectado');
             
-            // TODO: marcadores-activos
+            socket.emit('marcadores-activos', this.marcadores.activos);
 
-            // TODO: marcador-nuevo
+            socket.on('marcador-nuevo', (marcador) => {
+                this.marcadores.agregarMarcador(marcador);
+                socket.broadcast.emit('marcador-nuevo', marcador);
+            });
 
             // TODO: marcador-actualizado
 
